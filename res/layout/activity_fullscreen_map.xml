@@ -11,16 +11,12 @@
          TextureView, etc.
     -->
 
-    <TextView
+    <com.google.android.gms.maps.MapView	
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="@string/dummy_content"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        android:keepScreenOn="true" />
 
     <!--
          This FrameLayout insets its children based on system windows using
@@ -46,9 +42,12 @@
                 android:id="@+id/dummy_button"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
+                android:background="#673AB7"
+                android:typeface="monospace"
+                android:textColor="#ffffff"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/dummy_button" />
+                android:text="@string/wait_for_bus" />
         </LinearLayout>
     </FrameLayout>
 
