@@ -108,7 +108,6 @@ public class FullscreenMapActivity extends Activity {
 		// while interacting with the UI.
 		findViewById(R.id.dummy_button).setOnTouchListener(
 				mDelayHideTouchListener);
-		sem = new Semaphore(1, true);
 		setupLocationTracking();
 		startMTDDataPolling();
 	}
@@ -117,7 +116,6 @@ public class FullscreenMapActivity extends Activity {
 	// ----------------------------------------------------------------------------------
 	private LocationManager locations;
 	private MTDThread mtdUpdates;
-	private Semaphore sem;
 	private GoogleMap map;
 
 	public void startMTDDataPolling() {
