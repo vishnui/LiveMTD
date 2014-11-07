@@ -13,7 +13,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.indukuri.mtdlive.util.SystemUiHider;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
