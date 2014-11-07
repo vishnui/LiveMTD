@@ -21,7 +21,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MTDThread extends Thread {
-	private static final long MINUTE= 30*1000 ;
+	private static final long MINUTE= 10*1000 ;
 	private boolean running;
 	private GoogleMap map;
 	private String reqString = "https://developer.cumtd.com/api/v2.2/json/GetVehicles" +
