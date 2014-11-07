@@ -35,8 +35,8 @@ public class FullscreenMapActivity extends Activity {
 	private static final boolean TOGGLE_ON_CLICK = true;
 	private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
 	private SystemUiHider mSystemUiHider;
-	private MapView contentView ;
-	
+	private MapView contentView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -109,43 +109,42 @@ public class FullscreenMapActivity extends Activity {
 		findViewById(R.id.dummy_button).setOnTouchListener(
 				mDelayHideTouchListener);
 		sem = new Semaphore(1, true);
-		setupLocationTracking() ;
-		startMTDDataPolling() ;
+		setupLocationTracking();
+		startMTDDataPolling();
 	}
-	
-	// Location Tracking Setup 
+
+	// Location Tracking Setup
 	// ----------------------------------------------------------------------------------
-	private LocationManager locations ;
-	private MTDThread mtdUpdates ;
-	private Semaphore sem ;
-	private GoogleMap map ;
-	
-	public void startMTDDataPolling(){
-		locations = (LocationManager) getSystemService(Context.LOCATION_SERVICE) ;
-		Location loc = locations.getLastKnownLocation(LocationManager.NETWORK_PROVIDER) ;
-		map = contentView.getMap() ;
-		mtdUpdates = new MTDThread(loc, map) ;
-		mtdUpdates.start() ;
+	private LocationManager locations;
+	private MTDThread mtdUpdates;
+	private Semaphore sem;
+	private GoogleMap map;
+
+	public void startMTDDataPolling() {
+		locations = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		Location loc = locations
+				.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		map = contentView.getMap();
+		mtdUpdates = new MTDThread(loc, map);
+		mtdUpdates.start();
 	}
-	
+
 	public void setupLocationTracking() {
-		locations.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 5, new LocationListener() {
-			public void onStatusChanged(String provider, int status, Bundle extras) {			}
-			public void onProviderEnabled(String provider) {		}
-			public void onProviderDisabled(String provider) {		}
-			public void onLocationChanged(Location location) {
-				try {
-					sem.acquire() ;
-					map.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()))) ;
-					mtdUpdates.updateLocation(location);
-				} catch (InterruptedException e) {
-				} finally { 
-					sem.release() ;
-				}
-			}
-		}) ;
+		locations.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 5,
+				new LocationListener() {
+					public void onStatusChanged(String provider, int status,
+							Bundle extras) {					}
+					public void onProviderEnabled(String provider) {					}
+					public void onProviderDisabled(String provider) {					}
+					public void onLocationChanged(Location location) {
+						map.animateCamera(CameraUpdateFactory
+								.newLatLng(new LatLng(location.getLatitude(),
+										location.getLongitude())));
+						// TODO Move Icon
+					}
+				});
 	}
-	
+
 	// ----------------------------------------------------------------------------------
 
 	// FULL SCREEN RELATED SHIT
@@ -158,6 +157,7 @@ public class FullscreenMapActivity extends Activity {
 		// are available.
 		delayedHide(100);
 	}
+
 	/**
 	 * Touch listener to use for in-layout UI controls to delay hiding the
 	 * system UI. This is to prevent the jarring behavior of controls going away
@@ -179,6 +179,7 @@ public class FullscreenMapActivity extends Activity {
 			mSystemUiHider.hide();
 		}
 	};
+
 	/**
 	 * Schedules a call to hide() in [delay] milliseconds, canceling any
 	 * previously scheduled calls.
