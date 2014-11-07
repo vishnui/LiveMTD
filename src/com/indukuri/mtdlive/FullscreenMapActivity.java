@@ -43,6 +43,9 @@ public class FullscreenMapActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_fullscreen_map);
 
+		setupLocationTracking();
+		startMTDDataPolling();
+		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		contentView = (MapView) findViewById(R.id.fullscreen_content);
 
@@ -108,8 +111,6 @@ public class FullscreenMapActivity extends Activity {
 		// while interacting with the UI.
 		findViewById(R.id.dummy_button).setOnTouchListener(
 				mDelayHideTouchListener);
-		setupLocationTracking();
-		startMTDDataPolling();
 	}
 
 	// Location Tracking Setup

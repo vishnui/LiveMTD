@@ -15,6 +15,7 @@ import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -94,7 +95,9 @@ public class MTDThread extends Thread {
 	}
 	
 	public BitmapDescriptor getIcon(String color){
-		return null ;
+		color = color.toLowerCase();
+		// TODO ALL the diff colors
+		return BitmapDescriptorFactory.fromResource(R.drawable.greenbus) ;
 	}
 
 	public void mstop() {
