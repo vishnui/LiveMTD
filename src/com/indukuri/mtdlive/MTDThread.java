@@ -21,7 +21,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MTDThread extends Thread {
-	private static final long MINUTE= 10*1000 ;
+	private static final long FIVE_SECONDS = 5*1000 ;
 	private boolean running;
 	private GoogleMap map;
 	private String reqString = "https://developer.cumtd.com/api/v2.2/json/GetVehicles" +
@@ -56,7 +56,7 @@ public class MTDThread extends Thread {
 			}
 			// Sleep for a full minute before asking for an update
 			try {
-				Thread.sleep(MINUTE);
+				Thread.sleep(FIVE_SECONDS);
 			} catch (InterruptedException e) {
 			}
 		}
@@ -81,12 +81,12 @@ public class MTDThread extends Thread {
 			JSONObject trip = vehicle.getJSONObject("trip") ;
 			JSONObject location = vehicle.getJSONObject("location") ;
 			
-			String color = trip.getString("route_id") ;
+			String routeid = trip.getString("route_id") ;
 			String lat = location.getString("lat") ;
 			String lng = location.getString("lon");
 			
 			LatLng busPos = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-			addBus(color, busPos) ;
+			addBus(routeid, busPos) ;
 		}
 	}
 
@@ -109,10 +109,31 @@ public class MTDThread extends Thread {
 		map.addMarker(opts);
 	}
 	
-	public BitmapDescriptor getIcon(String color){
-		color = color.toLowerCase(Locale.US);
-		// TODO ALL the diff colors
-		return BitmapDescriptorFactory.fromResource(R.drawable.greenbus) ;
+	public BitmapDescriptor getIcon(String route){
+		route = route.toLowerCase(Locale.US);
+		int ret ;
+		
+		if(route.contains("air")) ret = R.drawable.airbus ;
+		else if(route.contains("navy")) ret = R.drawable.navybus ;
+		else if(route.contains("illini")) ret = R.drawable.illinibus ;
+		else if(route.contains("silver")) ret = R.drawable.silverbus ;
+		else if(route.contains("brown")) ret = R.drawable.brownbus ;
+		else if(route.contains("lime")) ret = R.drawable.limebus ;
+		else if(route.contains("green")) ret = R.drawable.greenbus ;
+		else if(route.contains("red")) ret = R.drawable.redbus ;
+		else if(route.contains("lavendar")) ret = R.drawable.lavendarbus ;
+		else if(route.contains("blue")) ret = R.drawable.bluebus ;
+		else if(route.contains("ruby")) ret = R.drawable.rubybus ;
+		else if(route.contains("orange")) ret = R.drawable.orangebus ;
+		else if(route.contains("grey")) ret = R.drawable.greybus ;
+		else if(route.contains("gold")) ret = R.drawable.goldbus ;
+		else if(route.contains("pink")) ret = R.drawable.pinkbus ;
+		else if(route.contains("teal")) ret = R.drawable.tealbus ;
+		else if(route.contains("bronze")) ret = R.drawable.bronzebus ;
+		else if(route.contains("yellow")) ret = R.drawable.yellowbus ;
+		else ret = R.drawable.saferides ;
+		
+		return BitmapDescriptorFactory.fromResource(ret) ;
 	}
 
 	public void mstop() {
