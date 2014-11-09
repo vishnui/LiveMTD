@@ -1,6 +1,12 @@
-# Built application files
-*.apk
-*.ap_
+# Most bin files
+bin/*.xml
+bin/*.ap_
+bin/res/
+bin/*.txt
+bin/classes/
+bin/dexedLibs/
+bin/*.cache
+bin/*.dex
 
 # Files for the Dalvik VM
 *.dex
@@ -9,7 +15,6 @@
 *.class
 
 # Generated files
-bin/
 gen/
 
 # Gradle files
