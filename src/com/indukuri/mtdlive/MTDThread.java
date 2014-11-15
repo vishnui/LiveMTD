@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,10 +14,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MTDThread extends Thread {
 	private static final long FIVE_SECONDS = 5*1000 ;
@@ -86,7 +82,7 @@ public class MTDThread extends Thread {
 			String lng = location.getString("lon");
 			
 			LatLng busPos = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-			addBus(routeid, busPos) ;
+//			addBus(routeid, busPos) ;
 		}
 	}
 
@@ -102,40 +98,6 @@ public class MTDThread extends Thread {
 		return ret;
 	}
 	
-	public void addBus(String color, LatLng busPos){
-		MarkerOptions opts = new MarkerOptions() ;
-		BitmapDescriptor colorAppropriateIcon = getIcon(color) ;
-		opts.anchor(0.5f, 0.5f).draggable(false).flat(true).position(busPos).icon(colorAppropriateIcon) ;
-		map.addMarker(opts);
-	}
-	
-	public BitmapDescriptor getIcon(String route){
-		route = route.toLowerCase(Locale.US);
-		int ret ;
-		
-		if(route.contains("air")) ret = R.drawable.airbus ;
-		else if(route.contains("navy")) ret = R.drawable.navybus ;
-		else if(route.contains("illini")) ret = R.drawable.illinibus ;
-		else if(route.contains("silver")) ret = R.drawable.silverbus ;
-		else if(route.contains("brown")) ret = R.drawable.brownbus ;
-		else if(route.contains("lime")) ret = R.drawable.limebus ;
-		else if(route.contains("green")) ret = R.drawable.greenbus ;
-		else if(route.contains("red")) ret = R.drawable.redbus ;
-		else if(route.contains("lavendar")) ret = R.drawable.lavendarbus ;
-		else if(route.contains("blue")) ret = R.drawable.bluebus ;
-		else if(route.contains("ruby")) ret = R.drawable.rubybus ;
-		else if(route.contains("orange")) ret = R.drawable.orangebus ;
-		else if(route.contains("grey")) ret = R.drawable.greybus ;
-		else if(route.contains("gold")) ret = R.drawable.goldbus ;
-		else if(route.contains("pink")) ret = R.drawable.pinkbus ;
-		else if(route.contains("teal")) ret = R.drawable.tealbus ;
-		else if(route.contains("bronze")) ret = R.drawable.bronzebus ;
-		else if(route.contains("yellow")) ret = R.drawable.yellowbus ;
-		else ret = R.drawable.saferides ;
-		
-		return BitmapDescriptorFactory.fromResource(ret) ;
-	}
-
 	public void mstop() {
 		running = false;
 	}

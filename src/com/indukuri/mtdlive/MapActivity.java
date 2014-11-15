@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class MapActivity extends FragmentActivity {
 
 	private SupportMapFragment mapView;
+	private GoogleMap map ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,30 +26,22 @@ public class MapActivity extends FragmentActivity {
 		setContentView(R.layout.activity_fullscreen_map);
 		// Get Reference to MapView
 		mapView = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)) ;
-	}
-
-	// Location Tracking Setup
-	// ----------------------------------------------------------------------------------
-	private LocationManager locations;
-	private MTDThread mtdUpdates;
-	private GoogleMap map;
-
-	public void startMTDDataPolling() {
+		// Init google map
 		map = mapView.getMap();
 		map.getUiSettings().setMyLocationButtonEnabled(true);
 		map.setMyLocationEnabled(true);
 		MapsInitializer.initialize(this);
-		mtdUpdates = new MTDThread(map, this);
-		mtdUpdates.start();
+		// INIT Firebase
+		Firebase.setAndroidContext(this);
+		// Start Getting Live bus updates
+		LiveBusUpdates updates = new LiveBusUpdates(map);
+		updates.startUpdates();
 	}
-
-	// ----------------------------------------------------------------------------------
-
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		startMTDDataPolling();
-		locations = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		// Zoom in on last known location
+		LocationManager locations = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Location loc = locations
 				.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
