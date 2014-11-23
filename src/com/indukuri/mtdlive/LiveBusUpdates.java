@@ -55,18 +55,20 @@ public class LiveBusUpdates implements ChildEventListener {
 		double lat = (Double) snapshot.child("location/lat").getValue();
 		double lon = (Double) snapshot.child("location/lon").getValue();
 		String route = (String) snapshot.child("trip/route_id").getValue();
+		String headsign = (String) snapshot.child("trip/trip_headsign").getValue();
 		String busID = (String) snapshot.child("vehicle_id").getValue();
 		LatLng bus = new LatLng(lat, lon);
-		addBus(route, bus, busID);
+		addBus(route, bus, busID, headsign);
 		Log.e("LIVEMTD", "Added Bus "+busID) ;
 	}
 
 	// Adding Bus to the map
-	public void addBus(String route, LatLng busPos, String busID) {
+	public void addBus(String route, LatLng busPos, String busID, String headsign) {
 		MarkerOptions opts = new MarkerOptions();
 		BitmapDescriptor colorAppropriateIcon = getIcon(route);
-		opts.anchor(0.5f, 0.5f).draggable(false).flat(true).position(busPos)
+		opts.anchor(0.5f, 0.5f).draggable(false).flat(false).position(busPos)
 				.icon(colorAppropriateIcon);
+		opts.title(route).snippet(headsign) ;
 		Marker busMarker = map.addMarker(opts);
 		markers.put(busID, busMarker);
 	}

@@ -36,6 +36,11 @@ public class MapActivity extends FragmentActivity {
 		// Start Getting Live bus updates
 		LiveBusUpdates updates = new LiveBusUpdates(map);
 		updates.startUpdates();
+		// Add bus stops
+		UpdateStopDepartures usd = new UpdateStopDepartures(map) ;
+		usd.addBusStops();  
+		// Custom Info Windows
+		map.setInfoWindowAdapter(new PopupAdapter(getLayoutInflater()));
 	}
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
@@ -45,6 +50,6 @@ public class MapActivity extends FragmentActivity {
 		Location loc = locations
 				.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
-		map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 12));
+		map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 16));
 	}
 }

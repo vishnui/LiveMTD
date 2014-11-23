@@ -6,7 +6,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpUtils {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class NetworkDataUtils {
+	
 	public static String contactMTD(String reqString) {
 		URL url;
 		try {
@@ -16,12 +20,12 @@ public class HttpUtils {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					urlConnection.getInputStream()));
 			String resp = readStream(in);
-			return resp ;
+			return resp;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null ;
+			return null;
 		}
-		
+
 	}
 
 	public static String readStream(BufferedReader is) throws IOException {
@@ -31,5 +35,10 @@ public class HttpUtils {
 			sb.append(line);
 		}
 		return sb.toString();
+	}
+
+	public static JSONObject getJSONObjectFromMTD(String reqString) throws JSONException {
+		String resp = contactMTD(reqString) ;
+		return new JSONObject(resp);
 	}
 }
