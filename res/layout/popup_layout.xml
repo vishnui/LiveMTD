@@ -17,6 +17,7 @@
         android:id="@+id/snippet"
         android:layout_width="match_parent"
         android:textColor="@android:color/black"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:textSize="14sp" />
 
