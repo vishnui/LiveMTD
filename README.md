@@ -5,6 +5,7 @@ An android application that presents users with a live Google Map with all the C
 Version change log
 =======
 - CURRVER) - Text centered/Formatting mostly.  Next major version will include full schedule information.  Need to stay away from any navigation like functionality to avoid GMaps API TOS Violations.  Algolia will be very cool to have.
+- Bug fixes mostly; Fixed some marker info windows disappearing/not refreshing correctly
 - Applying to Algolia for a little more space in their free plan to put all stop information.
 - Using Firebase as bus ETA cache
 - Bus ETAs are live!
