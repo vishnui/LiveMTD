@@ -18,6 +18,7 @@ public class MapActivity extends FragmentActivity {
 
 	private SupportMapFragment mapView;
 	private GoogleMap map ;
+	private CurrentServerThread server ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,9 @@ public class MapActivity extends FragmentActivity {
 		usd.addBusStops();  
 		// Custom Info Windows
 		map.setInfoWindowAdapter(new PopupAdapter(getLayoutInflater()));
+		// Start server if needed
+		server = new CurrentServerThread() ;
+		server.start() ;
 	}
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {

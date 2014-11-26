@@ -4,7 +4,8 @@ An android application that presents users with a live Google Map with all the C
  
 Version change log
 =======
-- CURRVER) - Text centered/Formatting mostly.  Next major version will include full schedule information.  Need to stay away from any navigation like functionality to avoid GMaps API TOS Violations.  Algolia will be very cool to have.
+- PLANS - Next major version will include full schedule information and real time search.  Need to stay away from any navigation like functionality though; avoid GMaps API TOS Violations.  Algolia will be very cool to have.
+- Distributed the server.  Now one of the clients polls the server and when it disconnects, another client picks up the polling.  This might wreck havoc on data plans though :(
 - Bug fixes mostly; Fixed some marker info windows disappearing/not refreshing correctly
 - Applying to Algolia for a little more space in their free plan to put all stop information.
 - Using Firebase as bus ETA cache
