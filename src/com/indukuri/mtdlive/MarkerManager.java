@@ -3,10 +3,9 @@ package com.indukuri.mtdlive;
 import java.util.Collection;
 import java.util.HashMap;
 
-import android.util.Log;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -30,6 +29,7 @@ public class MarkerManager implements GoogleMap.OnCameraChangeListener{
 		stopQuadTree = new PointQuadTree<VishiousMarker>(champaign) ;
 		map.setOnCameraChangeListener(this);
 		map.setOnInfoWindowClickListener(onStopClickListener);
+		map.setOnMarkerClickListener(onMarkerClickListener) ;
 	}
 	
 	public void addMarker(LatLng stopPos, String name, String id){
@@ -85,6 +85,14 @@ public class MarkerManager implements GoogleMap.OnCameraChangeListener{
 			// else update
 			UpdateDepsTask thread = new UpdateDepsTask(vmark);
 			thread.execute(marker) ;
+		}
+	};
+	
+	private OnMarkerClickListener onMarkerClickListener = new OnMarkerClickListener() {
+		public boolean onMarkerClick(Marker marker) {
+			marker.showInfoWindow() ;
+			onStopClickListener.onInfoWindowClick(marker);
+			return true;
 		}
 	};
 }

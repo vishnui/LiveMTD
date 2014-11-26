@@ -40,7 +40,10 @@ public class UpdateStopDepartures {
 			if(vmark == null) return ;
 			String val = (String) snap.getValue() ;
 			String[] deps = val.split(":::")  ;
-			vmark.setSnippet(deps[0]) ;
+			if(deps[0] == null || deps[0].equals(""))
+				vmark.setSnippet("No buses in the next half hour :(") ;
+			else 
+				vmark.setSnippet(deps[0]) ;
 			if(deps.length > 1)
 				vmark.setLastUpdatedOnFirebase(Long.parseLong(deps[1])) ;
 		}

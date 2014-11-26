@@ -26,7 +26,7 @@ public class UpdateDepsTask extends AsyncTask<Marker, Marker, Marker>{
 	
 	@Override
 	protected Marker doInBackground(Marker... params) {
-		String infoWindowContents = null;
+		String infoWindowContents = "";
 		// Get JSON Response
 		try {
 			JSONObject response = NetworkDataUtils.getJSONObjectFromMTD(reqString) ;
@@ -44,26 +44,29 @@ public class UpdateDepsTask extends AsyncTask<Marker, Marker, Marker>{
 				sb.append(headsign+"\t"+expectedMins+" min\n") ;
 			}
 			infoWindowContents = sb.toString() ;
+			// Update data structures
+			int lastNewLine ;
+			long update = marker.updated();
+			if( (lastNewLine = infoWindowContents.lastIndexOf("\n")) != -1){
+				infoWindowContents.substring(0, lastNewLine) ;
+				stopDeps.setValue(infoWindowContents+":::"+update) ;
+			} else {
+				infoWindowContents = "No buses in the next half hour :(" ;
+				stopDeps.setValue(":::"+update) ;
+			}
+			Log.e("LiveMTD", "window: "+infoWindowContents) ;
+			marker.setSnippet(infoWindowContents);
+			resultString = infoWindowContents ;
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		// If crashed, leave
-		if(infoWindowContents == null) return params[0];
-		// else write to infoWindowContents
-		Log.e("LiveMTD", "window: "+infoWindowContents) ;
-		marker.setSnippet(infoWindowContents);
-		long update = marker.updated();
-		stopDeps.setValue(infoWindowContents+":::"+update) ;
-		resultString = infoWindowContents ;
 		return params[0] ;
 	}
 
 	@Override
 	protected void onPostExecute(Marker result) {
 		result.setSnippet(resultString);
-		result.hideInfoWindow();
-//		result.setVisible(false);
-//		result.setVisible(true);
+		result.hideInfoWindow() ;
 		result.showInfoWindow();
 	}
 }
