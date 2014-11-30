@@ -7,13 +7,12 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.model.Marker;
-
 @SuppressLint("InflateParams")
-public class PopupAdapter implements InfoWindowAdapter {
+public class PopupInfoWindowAdapter implements InfoWindowAdapter {
 	private View popup = null;
 	private LayoutInflater inflater = null;
 
-	PopupAdapter(LayoutInflater infl) {
+	PopupInfoWindowAdapter(LayoutInflater infl) {
 		inflater = infl;
 	}
 

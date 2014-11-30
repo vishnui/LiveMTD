@@ -2,6 +2,7 @@ package com.indukuri.mtdlive;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
@@ -34,7 +35,7 @@ public class MarkerManager implements GoogleMap.OnCameraChangeListener{
 	
 	public void addMarker(LatLng stopPos, String name, String id){
 		MarkerOptions opts = new MarkerOptions();
-		opts.draggable(false).anchor(0.5f, 0.5f)
+		opts.draggable(false).anchor(0.5f, 0.5f).flat(false)
 				.icon(BitmapDescriptorFactory.fromResource(R.drawable.busstop));
 		opts.title(name).position(stopPos) ;
 		VishiousMarker marker = new VishiousMarker(opts, id) ;
@@ -67,11 +68,30 @@ public class MarkerManager implements GoogleMap.OnCameraChangeListener{
 		for(VishiousMarker opts : markers){
 			Marker mark = map.addMarker(opts.getOpts()) ;
 			stops.put(mark, opts);
+			if(opts.showOnLoad) {
+				opts.showOnLoad = false ;
+				mark.showInfoWindow() ;
+			}
 		}
 	}
 	
-	public VishiousMarker getMarker(String id){
-		return allStops.get(id);
+	// This is not the case that I optimized for...
+	public Marker getMapMarker(String id){
+		VishiousMarker vmark = allStops.get(id) ;
+		for(Entry<Marker, VishiousMarker> entry : stops.entrySet()) {
+			if(entry.getValue().equals(vmark)) return entry.getKey() ;
+		}
+		return null ;
+	}
+	
+	public VishiousMarker getVishiousMarker(String id){
+		VishiousMarker ret = allStops.get(id);
+		if(ret == null) {
+			for(int i=1; i <= 10; i++){
+				if((ret = allStops.get(id+":"+i)) != null) return ret ;
+			}
+		}
+		return ret ;
 	}
 	
 	private OnInfoWindowClickListener onStopClickListener = new OnInfoWindowClickListener() {

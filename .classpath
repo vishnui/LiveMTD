@@ -7,5 +7,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="/home/vishnui/Desktop/firebase-client-android-2.0.1.jar"/>
 	<classpathentry kind="lib" path="/home/vishnui/workspace/LiveMTD/libs/jackson-all-1.9.5.jar"/>
+	<classpathentry kind="lib" path="/home/vishnui/Desktop/algoliasearch-client-android-1.5.9.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

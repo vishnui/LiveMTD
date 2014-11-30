@@ -9,6 +9,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 @SuppressWarnings("unchecked")
 public class UpdateStopDepartures {
@@ -36,7 +37,7 @@ public class UpdateStopDepartures {
 		public void onChildMoved(DataSnapshot arg0, String arg1) {	}
 		public void onChildChanged(DataSnapshot snap, String arg1) {
 			String stopid = snap.getKey() ;
-			VishiousMarker vmark = markersInView.getMarker(stopid);
+			VishiousMarker vmark = markersInView.getVishiousMarker(stopid);
 			if(vmark == null) return ;
 			String val = (String) snap.getValue() ;
 			String[] deps = val.split(":::")  ;
@@ -48,7 +49,6 @@ public class UpdateStopDepartures {
 				vmark.setLastUpdatedOnFirebase(Long.parseLong(deps[1])) ;
 		}
 		public void onChildAdded(DataSnapshot arg0, String arg1) {
-			// Do everything in on child changed
 			onChildChanged(arg0, arg1);
 		}
 		public void onCancelled(FirebaseError arg0) {		}
@@ -72,4 +72,12 @@ public class UpdateStopDepartures {
 			}
 		}
 	};
+	
+	public VishiousMarker getVishiousMarker(String id){
+		return markersInView.getVishiousMarker(id) ;
+	}
+	
+	public Marker getMapMarker(String id){
+		return markersInView.getMapMarker(id) ;
+	}
 }
