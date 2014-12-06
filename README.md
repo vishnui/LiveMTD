@@ -1,6 +1,11 @@
 LiveMTD
 =======
 An android application that presents users with a live Google Map with all the Champaign Urbana buses running at the moment.  All the current apps make you type in an intersection name or origin and destination and time but I just want to quickly see where the bus is right now.  Plus live bus ETAs are also rather hard to find.  They require constant texting their web service to get.  So I built a much easier to use app; just open to see near real time color coded bus positions and tap any stop to see ETAs on all incoming buses in the next half hour. 
+
+Latest Screenshot
+=======
+
+![Screenshot](/LiveMTDScreenshot.png?raw=true "Live 22N position and ETAs")
  
 Version change log
 =======
