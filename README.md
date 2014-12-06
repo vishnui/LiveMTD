@@ -6,6 +6,8 @@ Latest Screenshot
 =======
 
 ![Screenshot](/LiveMTDScreenshot.png?raw=true "Live 22N position and ETAs")
+
+That little purple bus in the bottom left corner is the 220N and the silver bus next to the stop is the 130N. For all you unfamiliar with its route, the 220 is about 30 seconds away from the selected stop.  The system seems to be accurate to about one minute give or take.  Not too bad but I'm working on making it even better. :)
  
 Version change log
 =======
