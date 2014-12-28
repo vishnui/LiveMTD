@@ -1,12 +1,5 @@
-# Most bin files except APK file.
-bin/*.xml
-bin/*.ap_
-bin/res/
-bin/*.txt
-bin/classes/
-bin/dexedLibs/
-bin/*.cache
-bin/*.dex
+# All bin files
+bin/
 
 # Files for the Dalvik VM
 *.dex

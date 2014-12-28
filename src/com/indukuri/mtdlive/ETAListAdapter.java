@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -129,6 +130,7 @@ public class ETAListAdapter extends ArrayAdapter<String> {
 				launchService.putExtra("com.indukuri.livemtd.stop_id", vmark.getId()) ;
 				launchService.putExtra("com.indukuri.livemtd.bus", m.group(1)+m.group(2)) ;
 				context.startService(launchService);
+				Toast.makeText(context, "Tracking.  Check your notifications.", Toast.LENGTH_LONG).show() ;
 				return true ;
 			}
 		}) ;
