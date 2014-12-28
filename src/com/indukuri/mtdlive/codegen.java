@@ -13,9 +13,7 @@ public class codegen{
 			    int buspngIndex = name.indexOf("bus.png") ;
 			    if(buspngIndex == -1) continue ;
 			    name = name.substring(0, buspngIndex) ;
-			    String line ;
-			    line = "else if(route.contains(\""+name+"\")) ret = R.drawable."+name+"bus ;" ;
-				System.out.println(line) ;
+				System.out.println("else if(route.contains(\""+name+"\")) ret = R.drawable."+name+"bus ;") ;
 			}
 		}
 	}

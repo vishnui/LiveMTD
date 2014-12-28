@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.firebase.client.Firebase;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
 public class UpdateDepsTask extends AsyncTask<Marker, Marker, Marker>{
@@ -17,8 +19,10 @@ public class UpdateDepsTask extends AsyncTask<Marker, Marker, Marker>{
 	private Firebase stopDeps ;
 	private VishiousMarker marker ;
 	private String resultString ;
+	private GoogleMap map ;
 	
-	public UpdateDepsTask(VishiousMarker mark){
+	public UpdateDepsTask(VishiousMarker mark, GoogleMap map){
+		this.map = map ;
 		marker = mark ;
 		reqString += mark.getId() ; ;
 		stopDeps = new Firebase("https://livecumtd.firebaseio.com/stopDeps/"+mark.getId());
@@ -65,8 +69,14 @@ public class UpdateDepsTask extends AsyncTask<Marker, Marker, Marker>{
 
 	@Override
 	protected void onPostExecute(Marker result) {
+		if(result == null) 
+			return ;
+		
 		result.setSnippet(resultString);
 		result.hideInfoWindow() ;
 		result.showInfoWindow();
+		
+		if(map != null)
+			map.animateCamera(CameraUpdateFactory.newLatLng(result.getPosition())) ;
 	}
 }

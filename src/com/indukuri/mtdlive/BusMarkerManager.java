@@ -16,13 +16,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class LiveBusUpdates implements ChildEventListener {
+public class BusMarkerManager implements ChildEventListener {
 	private HashMap<String, Marker> markers;
-	private GoogleMap map;
 	private Firebase liveBuses ;
+	private GoogleMap map ;
 
-	public LiveBusUpdates(GoogleMap m) {
-		map = m;
+	public BusMarkerManager(GoogleMap map) {
+		this.map = map ;
 		markers = new HashMap<String, Marker>() ;
 		// Start listening to bus updates
 		liveBuses = new Firebase("https://livecumtd.firebaseio.com/liveBuses/vehicles") ;
@@ -60,6 +60,7 @@ public class LiveBusUpdates implements ChildEventListener {
 		LatLng bus = new LatLng(lat, lon);
 		addBus(route, bus, busID, headsign);
 		Log.e("LIVEMTD", "Added Bus "+busID) ;
+		MapActivity.takeOffSplash() ;
 	}
 
 	// Adding Bus to the map
@@ -93,7 +94,7 @@ public class LiveBusUpdates implements ChildEventListener {
 			ret = R.drawable.greenbus;
 		else if (route.contains("red"))
 			ret = R.drawable.redbus;
-		else if (route.contains("lavendar"))
+		else if (route.contains("lavender"))
 			ret = R.drawable.lavendarbus;
 		else if (route.contains("blue"))
 			ret = R.drawable.bluebus;
