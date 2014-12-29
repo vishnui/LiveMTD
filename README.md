@@ -1,15 +1,15 @@
 LiveMTD
 =======
-An android application that presents users with a live Google Map with all the Champaign Urbana buses running at the moment.  All the current apps make you type in an intersection name or origin and destination and time but I wanted to be able to quickly see where the bus is right now.  Plus live bus ETAs are also rather hard to find.  They require constant texting their web service to get.  So I built a much easier to use app; just open to see near real time color coded bus positions and tap any stop to see ETAs on all incoming buses in the next half hour. 
+An android application that presents users with a live Google Map with all the Champaign Urbana buses running at the moment.  All the current apps make you type in an intersection name or origin and destination and time but I wanted to be able to quickly see where the bus currently is.  Plus live bus ETAs are also rather hard to find; they require constant texting their web service to get.  So I built a much easier to use app: just open to see near real time color coded bus positions and tap any stop to see real time ETAs on all incoming buses in the next half hour. 
 
-Latest Screenshots
+Screenshots
 =======
 
 ![Screenshot](/Screenshots/screenshotGG.png?raw=true "Live 50E position and ETAs")
 
-That little purple bus in the bottom left corner is the 220N and the silver bus next to the stop is the 130N. For all you unfamiliar with its route, the 220 is about 30 seconds away from the selected stop.  The system seems to be accurate to about one minute give or take.  I doubt this is going to get any better.
+![Screenshot](/Screenshots/ScreenshotRTR.png?raw=true "ETAs and pull to refresh")
 
-Should be on the play store pretty soon.
+![Screenshot](/Screenshots/ScreenshotSILL.png?raw=true "Algolia powered search")
  
 Version change log
 =======
