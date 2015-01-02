@@ -41,6 +41,7 @@ public class TrackingService extends Service {
 		super.onDestroy();
 		handler.removeCallbacks(update);
 		mNotificationManager.cancelAll() ;
+		backend.removeEventListener(listener);
 		unregisterReceiver(dismissReceiver) ;
 	}
 
@@ -139,7 +140,8 @@ public class TrackingService extends Service {
 	private BroadcastReceiver dismissReceiver = new BroadcastReceiver() {
 		public void onReceive(Context context, Intent intent) {
 			mNotificationManager.cancelAll() ;
+			handler.removeCallbacks(update);
+			backend.removeEventListener(listener);
 			stopService(new Intent(context, TrackingService.class)) ;
-		}
-	};
+	}};
 }

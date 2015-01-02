@@ -90,6 +90,10 @@ public class ETAListAdapter extends ArrayAdapter<String> {
 	public String getItem(int position) {
 		return buses.get(position);
 	}
+	
+	public void setAlertButtonAnimations(){
+		
+	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -109,31 +113,41 @@ public class ETAListAdapter extends ArrayAdapter<String> {
 		if(m.find()){
 			// get bus route number
 			String bus = m.group(1) ;
-			int color = getBackgroundColor(bus); 
-
+			final int color = getBackgroundColor(bus); 
 			busname.setText(bus + m.group(2)+ " "+getBusName(bus)) ;
 			busname.setTextColor(color);
-
 			eta.setText("ETA: "+m.group(3)+" min") ;
-		} else {
-			busname.setText("Have fun walking") ;
-			busname.setTextColor(0xff000000);
 			
-			eta.setText("ETA: Never");
+			// set up animation
+			final ImageButton trackbutton = ((ImageButton) convertView.findViewById(R.id.trackButton)); 
+			final OnTouchListener touchListener = new OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					if(event.getAction() == MotionEvent.ACTION_UP) {
+						if(launchService != null) context.stopService(launchService);
+						launchService = new Intent(context, TrackingService.class) ;
+						launchService.putExtra("com.indukuri.livemtd.stop_id", vmark.getId()) ;
+						launchService.putExtra("com.indukuri.livemtd.bus", m.group(1)+m.group(2)) ;
+						context.startService(launchService);
+						Toast.makeText(context, "Tracking.  Check your notifications.", Toast.LENGTH_LONG).show() ;
+					}
+					return true ;
+				}
+			};
+			
+			trackbutton.setOnTouchListener(touchListener) ;
+			convertView.setOnTouchListener(new OnTouchListener() {
+				public boolean onTouch(View v, MotionEvent event) {
+					// Pass it on to the track button
+					touchListener.onTouch(trackbutton, event) ;
+					return true;
+				}
+			}) ;
+		} else { // 0 buses found
+			busname.setText("Have fun walking bitch") ;
+			busname.setTextColor(0xff000000);
+			eta.setText("ETA: Fuck you");
 		}
-		
-		ImageButton trackbutton = ((ImageButton) convertView.findViewById(R.id.trackButton)); 
-		trackbutton.setOnTouchListener(new OnTouchListener() {
-			public boolean onTouch(View v, MotionEvent event) {
-				if(launchService != null) context.stopService(launchService);
-				launchService = new Intent(context, TrackingService.class) ;
-				launchService.putExtra("com.indukuri.livemtd.stop_id", vmark.getId()) ;
-				launchService.putExtra("com.indukuri.livemtd.bus", m.group(1)+m.group(2)) ;
-				context.startService(launchService);
-				Toast.makeText(context, "Tracking.  Check your notifications.", Toast.LENGTH_LONG).show() ;
-				return true ;
-			}
-		}) ;
 		return convertView;
 	}
 	

@@ -54,7 +54,7 @@ public class MapActivity extends ActionBarActivity {
 		pager.setAdapter(new ScreenSlidePagerAdapter(getSupportFragmentManager())) ;
 		pager.setPageTransformer(true, new DepthPageTransformer()) ;
 		
-		// Don't hang at splash.  Leave no matter what after 4 seconds.
+		// Don't hang at splash.  Leave no matter what after 5 seconds.
 		handler.postDelayed(takeOffSplash, 5*1000) ;
 	}
 	

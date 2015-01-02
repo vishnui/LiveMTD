@@ -13,6 +13,7 @@ Screenshots
  
 Version change log
 =======
+- More Bug fixes.  
 - Bug fixes.  A lot of them.  This 
 - Splash screen while content loads
 - Pull to refresh on the eta list view

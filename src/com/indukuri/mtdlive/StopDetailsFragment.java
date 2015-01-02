@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -43,6 +44,9 @@ public class StopDetailsFragment extends Fragment {
 		ptrFrame.setPtrHandler(new PtrHandler() {
 			public void onRefreshBegin(PtrFrameLayout frame) {
 				adapter.update();
+				// after 15 seconds, refresh probably failed so just stop.
+				// don't make them wait for the full 60 second timeout
+				handler.postDelayed(failed, 15000) ;
 			}
 			public boolean checkCanDoRefresh(PtrFrameLayout frame,
 					View content, View header) {
@@ -51,6 +55,13 @@ public class StopDetailsFragment extends Fragment {
 		});
 		return view;
 	}
+	
+	private Handler handler = new Handler() ;
+	private Runnable failed = new Runnable() {
+		public void run() {
+			ptrFrame.refreshComplete() ;
+		}
+	};
 
 	@Override
 	public void onAttach(Activity con) {
