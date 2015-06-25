@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="22" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -29,8 +29,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:logo="@drawable/busstop"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Black.NoTitleBar"
+        android:logo="@drawable/busstop" >
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -38,41 +38,20 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyB3DYEGRDMxpnrKeXQ6bw1p24bS9T1E1kw" />
 
-        <provider
-            android:name=".BusStopSuggestionsProvider"
-            android:authorities="com.indukuri.BusStopSuggestionsProvider"
-            android:enabled="true"
-            android:exported="true" >
-            <path-permission
-                android:pathPrefix="/search_suggest_query"
-                android:readPermission="android.permission.GLOBAL_SEARCH" />
-        </provider>
-
         <activity
             android:name=".MapActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="nosensor" >
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>       
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LegalActivity"
-            android:label="@string/legal"
-            android:screenOrientation="nosensor" >
-        </activity>
         
-        <service android:name=".TrackingService" />
     </application>
 </manifest>

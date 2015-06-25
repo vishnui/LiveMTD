@@ -1,19 +1,13 @@
 LiveMTD
 =======
-An android application that presents users with a live Google Map with all the Champaign Urbana buses running at the moment.  All the current apps make you type in an intersection name or origin and destination and time but I wanted to be able to quickly see where the bus currently is.  Plus live bus ETAs are also rather hard to find; they require constant texting their web service to get.  So I built a much easier to use app: just open to see near real time color coded bus positions and tap any stop to see real time ETAs on all incoming buses in the next half hour. 
+An android application that presents users a Google Map with all the Champaign Urbana bus stops and bus ETAs for the next half hour.  All the current apps make you type in an intersection name or origin and destination and time but I wanted to be able to quickly see where the bus currently is.  Plus live bus ETAs are also rather hard to find; they require constant texting their web service to get.  So I built a much easier to use app: just open and touch a stop.
 
-Screenshots
-=======
 
-![Screenshot](/Screenshots/screenshotGG.png?raw=true "Live 50E position and ETAs")
-
-![Screenshot](/Screenshots/ScreenshotRTR.png?raw=true "ETAs and pull to refresh")
-
-![Screenshot](/Screenshots/ScreenshotSILL.png?raw=true "Algolia powered search")
- 
 Version change log
 =======
-- More Bug fixes.  
+- Significant speed up in load time. 
+- Significant clean up and removal of extraneous/little used features.
+- More Bug fixes.
 - Bug fixes.  A lot of them.  This 
 - Splash screen while content loads
 - Pull to refresh on the eta list view
